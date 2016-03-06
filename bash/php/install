@@ -1,0 +1,161 @@
+#!/bin/bash
+
+
+
+download()
+{
+    local url=$1
+    echo -n "    "
+    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{print $2}'
+    #echo -ne "\b\b\b\b"
+    echo " DONE"
+}
+
+
+## Dependencies ##
+#echo "Installing Dependencies..."
+#sudo apt-get update -y
+#sudo apt-get install -f autoconf bison libxml2-dev apache2-dev systemtap-sdt-dev openssl pkg-config libssl-dev libcurl4-openssl-dev libbz2-dev libgdbm-dev libjpeg62 libjpeg62-dev libpng12-0 libpng12-dev libfreetype6-dev libicu-dev libiodbc2-dev libxslt1-dev libiodbc2
+
+
+## php 7 ##
+echo "Downloading php v7.0.4..." 
+#wget http://in1.php.net/distributions/php-7.0.4.tar.bz2
+
+#curl -sS --progress http://in1.php.net/distributions/php-7.0.4.tar.bz2
+
+download http://in1.php.net/distributions/php-7.0.4.tar.bz2
+exit
+echo "Extracting ..." 
+tar -xjf php-7.0.4.tar.bz2
+mv php-7.0.4 php7-src
+cd php7-src
+
+echo "Configuring php with optimal options ..." 
+
+sudo ./configure \
+--prefix=/opt/php/php7 \
+--with-config-file-path=/opt/php/php7 \
+--with-config-file-scan-dir=/opt/php/php7/lib/conf.d \
+--with-pdo-pgsql \
+--with-pdo-mysql \
+--with-zlib-dir \
+--with-freetype-dir \
+--enable-mbstring \
+--with-libxml-dir=/usr \
+--enable-soap \
+--enable-calendar \
+--with-curl \
+--with-mcrypt \
+--with-zlib \
+--with-gd \
+--with-pgsql \
+--disable-rpath \
+--enable-inline-optimization \
+--with-bz2 \
+--with-zlib \
+--enable-sockets \
+--enable-sysvsem \
+--enable-sysvshm \
+--enable-pcntl \
+--enable-mbregex \
+--with-mhash \
+--enable-zip \
+--with-pcre-regex \
+--with-mysql-sock=/var/run/mysqld/mysqld.sock \
+--with-mysqli=mysqlnd \
+--with-pgsql=shared,/usr \
+--with-png-dir=/usr \
+--enable-gd-native-ttf \
+--with-openssl \
+--with-fpm-user=nginx \
+--with-fpm-group=nginx \
+--with-libdir=lib \
+--enable-ftp \
+--with-imap \
+--with-imap-ssl \
+--with-kerberos \
+--with-gettext \
+--with-gd \
+--with-jpeg-dir=/usr/lib/ \
+--enable-fpm
+
+
+
+
+
+## PHP 5.6 ##
+
+
+echo "Downloading php v5.6.19..." 
+wget http://my1.php.net/distributions/php-5.6.19.tar.bz2
+
+echo "Extracting ..." 
+tar -xjf php-5.6.19.tar.bz2
+mv php-5.6.19 php5-src
+cd php5-src
+
+echo "Configuring php with optimal options ..." 
+
+
+sudo ./configure \
+--prefix=/opt/php/php5 \
+--with-config-file-path=/opt/php/php5 \
+--with-config-file-scan-dir=/opt/php/php5/lib/conf.d \
+--with-pdo-pgsql \
+--with-pdo-mysql \
+--with-zlib-dir \
+--with-freetype-dir \
+--enable-mbstring \
+--with-libxml-dir=/usr \
+--enable-soap \
+--enable-calendar \
+--with-curl \
+--with-mcrypt \
+--with-zlib \
+--with-gd \
+--with-pgsql \
+--disable-rpath \
+--enable-inline-optimization \
+--with-bz2 \
+--with-zlib \
+--enable-sockets \
+--enable-sysvsem \
+--enable-sysvshm \
+--enable-pcntl \
+--enable-mbregex \
+--with-mhash \
+--enable-zip \
+--with-pcre-regex \
+--with-mysql \
+--with-mysqli \
+--with-pgsql=shared,/usr \
+--with-png-dir=/usr \
+--enable-gd-native-ttf \
+--with-openssl \
+--with-fpm-user=nginx \
+--with-fpm-group=nginx \
+--with-libdir=lib \
+--enable-ftp \
+--with-imap \
+--with-imap-ssl \
+--with-kerberos \
+--with-gettext \
+--with-gd \
+--with-jpeg-dir=/usr/lib/ \
+--enable-fpm
+
+
+
+
+
+
+download()
+{
+    local url=$1
+    echo -n "    "
+    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | \
+        sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
+    echo -ne "\b\b\b\b"
+    echo " DONE"
+}
