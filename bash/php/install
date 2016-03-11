@@ -52,7 +52,8 @@ install_dependencies(){
 	echo "Installing Dependencies..."
 	sudo apt-get update -y
 	sudo apt-get install -f autoconf bison libxml2-dev apache2-dev systemtap-sdt-dev openssl pkg-config libssl-dev libcurl4-openssl-dev \
-	 libbz2-dev libgdbm-dev libjpeg62 libjpeg62-dev libpng12-0 libpng12-dev libfreetype6-dev libicu-dev libiodbc2-dev libxslt1-dev libiodbc2
+	 libbz2-dev libgdbm-dev libjpeg62 libjpeg62-dev libpng12-0 libpng12-dev libfreetype6-dev libicu-dev libiodbc2-dev libxslt1-dev libiodbc2 \
+	 libc-client-dev
 }
 
 installv7(){
