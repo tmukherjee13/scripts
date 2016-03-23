@@ -166,6 +166,12 @@ _install(){
 	sudo make && make install
 	echo "Cleaning files..."
 	make clean
+	
+	cp php.ini-production ../php7/php.ini
+	cp sapi/fpm/init.d.php-fpm /etc/init.d/php7-fpm
+	
+	
+	
 	echo "Installation complete."
 }
 
